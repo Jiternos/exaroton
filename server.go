@@ -6,6 +6,7 @@ import (
 	"errors"
 )
 
+// Server struct to represent a Exaroton server
 type Server struct {
 	// The server unique ID
 	ID string `json:"id"`
@@ -39,20 +40,22 @@ type Server struct {
 	Shared bool `json:"shared"`
 }
 
+// Players struct to represent player list
 type Players struct {
 	// The server max player
 	Max int64 `json:"max"`
 
-	// The server player count
+	// The active player count
 	Count int64 `json:"count"`
 
-	// The server whitelist
+	// The active player list
 	List []interface{} `json:"list"`
 }
 
+// Software struct to represent the server software
 type Software struct {
 	// The software unique ID
-	// NO USAGE
+	// NO USAGE (Internal Usage Only)
 	ID string `json:"id"`
 
 	// The software name
@@ -62,11 +65,14 @@ type Software struct {
 	Version string `json:"version"`
 }
 
+// Logs struct to represent the logs content
+// Gonna remove this (just realize how bad it is)
 type Logs struct {
 	// The log content
 	Content string `json:"content"`
 }
 
+// ShareLogs struct to represent the mc.logs share link
 type ShareLogs struct {
 	// The log id
 	ID string `json:"id"`
@@ -78,14 +84,16 @@ type ShareLogs struct {
 	Raw string `json:"raw"`
 }
 
+// PlayerList struct to represent the playerlist
 type PlayerList struct {
 	// The server unique ID
 	ID string
 
-	// The player list type
+	// The playerlist type
+	// Whitelist/Ops/Banned-Players/Banned-IPs
 	Type string
 
-	// The list
+	// The list of players
 	List []string
 }
 
@@ -101,7 +109,7 @@ func (s *Session) Servers() (servers []*Server, err error) {
 
 }
 
-// Initialize a new server object
+// Create a new server object
 func (s *Session) Server(serverID string) (server *Server, err error) {
 	body, err := s.Request("GET", EndpointServer(serverID), nil)
 	if err != nil {

@@ -1,14 +1,13 @@
 # Golang exaroton API client
+This is the unofficial Go implementation of this 
+I'm still learning so expect badly design code PR are appreciated.
+
+Code Inspiration: https://github.com/bwmarrin/discordgo
 
 ## About
 The exaroton API allows automated access to some basic functionalities of your game servers, such as starting or stopping the server. You can read the API documentation here: https://developers.exaroton.com
 
-This is the unofficial Go implementation of this 
-I'm still learning so expect badly design code PR are appreciated.
-Code Inspiration: https://github.com/bwmarrin/discordgo
-
 ## Installation
-
 ```
 go get github.com/Jiternos/exaroton
 ```
@@ -39,7 +38,7 @@ if err != nil {
 	return
 }
 
-fmt.Println("My account is " + account.Name + " and I have " + account.Credits + " credits.")
+fmt.Printf("My account is %s and I have %d credits", account.Name, account.Credits)
 
 ````
 
@@ -79,7 +78,7 @@ if err != nil {
 	return
 }
 
-fmt.Prinltn(server.GetStatus())
+fmt.Prinln(server.GetStatus())
 ```
 
 #### Start/stop/restart the server

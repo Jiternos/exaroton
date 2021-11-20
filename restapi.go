@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// Session struct to represent a connection to the Exaroton API.
 type Session struct {
 	// General configurable settings.
 	// Authentication token for this session
@@ -19,12 +20,14 @@ type Session struct {
 	UserAgent string
 }
 
+// Request struct for the REST API result
 type Request struct {
 	Success string `json:"success"`
 	Errors  string `json:"error"`
 	Data    string `json:"data"`
 }
 
+// Send a request to the Exaroton REST API with the given method and path.
 func (s *Session) Request(method, url string, body io.Reader) (response []byte, err error) {
 	req, err := http.NewRequest(method, url, body)
 	if err != nil {
