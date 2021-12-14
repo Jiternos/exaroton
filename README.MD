@@ -1,4 +1,7 @@
-# Golang exaroton API client
+[![Go Reference](https://pkg.go.dev/badge/github.com/bwmarrin/discordgo.svg)](https://pkg.go.dev/github.com/Jiternos/exaroton)
+[![Go Report Card](https://goreportcard.com/badge/github.com/bwmarrin/discordgo)](https://goreportcard.com/report/github.com/Jiternos/exaroton)
+
+# Golang
 This is the unofficial Go implementation of this 
 I'm still learning so expect badly design code PR are appreciated.
 
@@ -169,6 +172,21 @@ fmt.Println(logs.URL)
 ```
 *This is cached and will not return the latest updates immediately. It's also not possible to share the server logs while the server is loading, stopping or saving.*
 
+#### Set the server MOTD
+```go
+server, err := client.Server(id)
+if err != nil {
+	log.Error(err)
+	return
+}
+
+err = server.SetMOTD(client, "Hello World!")
+if err != nil {
+	log.Error(err)
+	return
+}
+
+```
 #### Get the server RAM
 ```go
 server, err := client.Server(id)
