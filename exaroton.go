@@ -6,7 +6,7 @@ import (
 )
 
 // Exaroton API Wrapper Version
-const VERSION = "1.0.1"
+const VERSION = "1.0.2"
 
 // Creates a new Exaroton session
 func New(token string) (s *Session) {
