@@ -109,7 +109,7 @@ func (s *Session) Servers() (servers []*Server, err error) {
 
 }
 
-// Create a new server object
+// Get the server details as a struct
 func (s *Session) Server(serverID string) (server *Server, err error) {
 	body, err := s.Request("GET", EndpointServer(serverID), nil)
 	if err != nil {
@@ -151,6 +151,27 @@ func (server *Server) ShareLogs(s *Session) (shareLogs *ShareLogs, err error) {
 
 	err = json.Unmarshal(body, &shareLogs)
 	return
+}
+
+// Set the server MOTD
+func (server *Server) SetMOTD(s *Session, motd string) (err error) {
+	data := struct {
+		Ram string `json:"motd"`
+	}{motd}
+
+	var tempBody []byte
+
+	tempBody, err = json.Marshal(data)
+	if err != nil {
+		return err
+	}
+
+	_, err = s.Request("POST", EndpointMOTD(server.ID), bytes.NewBuffer(tempBody))
+	if err != nil {
+		return err
+	}
+
+	return err
 }
 
 // Get the server ram

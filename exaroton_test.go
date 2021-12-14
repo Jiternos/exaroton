@@ -1,12 +1,13 @@
 package exaroton
 
 import (
+	"os"
 	"testing"
 )
 
 var (
-	envToken  = "secret"
-	envServer = "abcdefghijklmnop"
+	envToken  = os.Getenv("EXAROTON_TOKEN")
+	envServer = os.Getenv("EXAROTON_SERVER")
 )
 
 func TestAccount(t *testing.T) {
@@ -195,5 +196,26 @@ func TestRemovePlayerList(t *testing.T) {
 	username := []string{"a", "b", "c", "d"}
 
 	playerList.RemoveEntry(client, username)
+
+}
+
+func TestMotd(t *testing.T) {
+	client := New(envToken)
+
+	server, err := client.Server(envServer)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	t.Log(server.MOTD)
+
+	err = server.SetMOTD(client, "Hello!")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	t.Log(server.MOTD)
 
 }

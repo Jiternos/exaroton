@@ -12,6 +12,7 @@ var (
 	EndpointServer         = func(serverID string) string { return EndpointServers + serverID }
 	EndpointLogs           = func(serverID string) string { return EndpointServer(serverID) + "/logs/" }
 	EndpointShareLogs      = func(serverID string) string { return EndpointLogs(serverID) + "share/" }
+	EndpointMOTD           = func(serverID string) string { return EndpointServer(serverID) + "/options/" + "motd/" }
 	EndpointRam            = func(serverID string) string { return EndpointServer(serverID) + "/options" + "/ram/" }
 	EndpointStart          = func(serverID string) string { return EndpointServer(serverID) + "/start/" }
 	EndpointStop           = func(serverID string) string { return EndpointServer(serverID) + "/stop/" }
